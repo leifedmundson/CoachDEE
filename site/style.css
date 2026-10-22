@@ -1,0 +1,258 @@
+/* =====================================================================
+   COACH DEE — THE LOOK OF THE SITE
+   ---------------------------------------------------------------------
+   To change colors or fonts, edit ONLY the settings in this first box.
+   Every part of the site uses these, so one change updates everything.
+   Colors are written as "hex codes" like #163A3C. To pick a new one,
+   search "color picker" on Google, choose a color, and copy its HEX code.
+   ===================================================================== */
+:root {
+
+  /* --- COLORS ------------------------------------------------------- */
+  --deep-teal:     #163A3C;   /* hero background, headings, form box   */
+  --darkest-teal:  #0F2A2B;   /* footer                                 */
+  --soft-teal:     #2A5254;   /* small accents on dark backgrounds      */
+  --sun-gold:      #D9A93F;   /* the big sun circle and main buttons    */
+  --light-gold:    #E7C26F;   /* small gold labels and big numbers      */
+  --clay:          #A4482D;   /* the stripe under the hero, small labels */
+  --sage:          #6F8B76;   /* top edge of the middle D.E.E. card      */
+  --cream:         #FBF8F1;   /* main page background                   */
+  --sand:          #EFE8D8;   /* "How we train" background              */
+  --off-white:     #F6F1E4;   /* light text on dark backgrounds         */
+  --muted-light:   #D5DFDA;   /* softer light text on dark backgrounds  */
+  --ink:           #1D2A2A;   /* main body text                         */
+  --ink-soft:      #354443;   /* paragraph text                         */
+  --white:         #FFFFFF;   /* card backgrounds                       */
+
+  /* --- FONTS -------------------------------------------------------- */
+  /* Headings use Montserrat; body text uses Karla. Both come free from
+     Google Fonts. To swap a font, also change the Google Fonts link near
+     the top of index.html.                                             */
+  --heading-font: 'Montserrat', system-ui, sans-serif;
+  --body-font:    'Karla', system-ui, sans-serif;
+
+  /* --- SIZES -------------------------------------------------------- */
+  --page-width:    1240px;    /* widest the content gets                */
+  --corner-round:  16px;      /* how rounded cards and photos are       */
+  --button-round:  8px;       /* how rounded buttons are                */
+  --section-space: 100px;     /* breathing room above/below sections    */
+}
+
+/* =====================================================================
+   Below here is the layout. You shouldn't need to touch it for everyday
+   changes — but it's safe to experiment; you can always undo.
+   ===================================================================== */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body-font);
+  font-size: 17px;
+  line-height: 1.6;
+}
+img, video { display: block; max-width: 100%; }
+a { color: var(--deep-teal); }
+a:hover { color: var(--clay); }
+input, textarea, select, button { font: inherit; }
+
+.wrap { max-width: var(--page-width); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+.section { padding-top: var(--section-space); padding-bottom: var(--section-space); }
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-family: var(--heading-font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.big-heading {
+  margin: 0 0 24px;
+  font-family: var(--heading-font);
+  font-weight: 800;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--deep-teal);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: var(--button-round);
+  font-weight: 700;
+  font-size: 17px;
+  border: 2px solid transparent;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-gold    { background: var(--sun-gold); color: #1A2222; }
+.btn-gold:hover { color: #1A2222; }
+.btn-outline { border-color: var(--off-white); color: var(--off-white); }
+.btn-outline:hover { color: var(--off-white); background: rgba(255,255,255,.08); }
+.btn-light   { background: var(--off-white); color: var(--deep-teal); padding: 12px 22px; font-size: 16px; }
+.btn-light:hover { color: var(--deep-teal); }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--deep-teal); color: var(--off-white); position: relative; overflow: hidden; }
+.hero-sun {
+  position: absolute; right: -140px; top: 60px;
+  width: 620px; height: 620px; border-radius: 50%;
+  background: var(--sun-gold); opacity: .9;
+}
+.topbar {
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px; padding-top: 18px; padding-bottom: 18px;
+}
+.brand {
+  color: var(--off-white); text-decoration: none;
+  font-family: var(--heading-font); font-weight: 800; font-size: 22px; letter-spacing: .08em;
+}
+.brand:hover { color: var(--light-gold); }
+.topbar nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; font-weight: 600; }
+.topbar nav a:not(.btn) { color: var(--off-white); text-decoration: none; padding: 10px 0; }
+.topbar nav a:not(.btn):hover { color: var(--light-gold); }
+
+.hero-body {
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 40px;
+  padding-top: 56px;
+}
+.hero-text { flex: 1 1 520px; min-width: 0; padding-bottom: 80px; }
+.hero-text .eyebrow { color: var(--light-gold); margin-bottom: 18px; }
+.hero h1 {
+  margin: 0 0 24px;
+  font-family: var(--heading-font); font-weight: 800;
+  font-size: clamp(40px, 6.2vw, 72px); line-height: .98; letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+.hero-lead { margin: 0 0 34px; font-size: 20px; max-width: 520px; color: var(--muted-light); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-photo { flex: 1 1 400px; min-width: 0; }
+.hero-photo img {
+  width: 100%; height: 620px; object-fit: cover; object-position: center 20%;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ---------- Stripe ---------- */
+.stripe { background: var(--clay); color: #FBF1E7; }
+.stripe .wrap {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px;
+  padding-top: 20px; padding-bottom: 20px;
+  font-family: var(--heading-font); font-size: 13px; font-weight: 700; letter-spacing: .16em;
+}
+
+/* ---------- D.E.E. cards ---------- */
+.dee-heading { margin-bottom: 48px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.dee-card {
+  background: var(--white); border-radius: var(--corner-round); padding: 34px;
+  border-top: 6px solid var(--sun-gold);
+}
+.dee-card.sage { border-top-color: var(--sage); }
+.dee-card.clay { border-top-color: var(--clay); }
+.dee-letter { font-family: var(--heading-font); font-size: 96px; font-weight: 800; line-height: 1; color: var(--deep-teal); }
+.dee-card h3 { margin: 10px 0; font-family: var(--heading-font); font-size: 22px; letter-spacing: .08em; color: var(--clay); }
+.dee-card p { margin: 0; color: var(--ink-soft); }
+
+/* ---------- About ---------- */
+.about { background: var(--deep-teal); color: var(--off-white); }
+.about .wrap { display: flex; flex-wrap: wrap; }
+.about-photo { flex: 1 1 520px; min-width: 0; }
+.about-photo img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
+.about-text {
+  flex: 1 1 480px; min-width: 0; padding: 72px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.about-text .eyebrow { color: var(--light-gold); }
+.about-text p { margin: 0 0 18px; font-size: 18px; color: var(--muted-light); }
+.about-text .belief {
+  margin: 4px 0 28px; font-family: var(--heading-font);
+  font-size: 26px; font-weight: 700; line-height: 1.3; color: var(--off-white);
+}
+.stats { display: flex; flex-wrap: wrap; gap: 28px; }
+.stat-number { font-family: var(--heading-font); font-size: 40px; font-weight: 800; line-height: 1; color: var(--light-gold); }
+.stat-label { font-size: 14px; }
+
+/* ---------- Testimonial ---------- */
+.quote { max-width: 1000px; text-align: center; }
+.quote blockquote {
+  margin: 0 0 20px; font-family: var(--heading-font);
+  font-size: clamp(22px, 3vw, 30px); font-weight: 600; line-height: 1.4; color: var(--deep-teal);
+}
+.quote .who { margin: 0; font-weight: 700; color: var(--clay); }
+
+/* ---------- Training ---------- */
+.train { background: var(--sand); }
+.train .big-heading { margin-bottom: 12px; }
+.train-intro { margin: 0 0 44px; font-size: 19px; color: var(--ink-soft); max-width: 620px; }
+.offer { background: var(--cream); border-radius: var(--corner-round); padding: 30px; }
+.offer h3 { margin: 0 0 8px; font-family: var(--heading-font); font-size: 20px; color: var(--deep-teal); }
+.offer p { margin: 0 0 18px; color: var(--ink-soft); }
+.offer .price { margin: 0; font-weight: 700; color: var(--clay); }
+.offer .price a { color: inherit; }
+.train-video {
+  margin-top: 24px; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: var(--corner-round); background: var(--deep-teal); object-fit: cover;
+}
+
+/* ---------- Contact ---------- */
+.contact { display: flex; flex-wrap: wrap; gap: 48px; }
+.contact-info { flex: 1 1 380px; min-width: 0; }
+.contact-logo { width: 220px; height: auto; margin-bottom: 24px; border-radius: 12px; }
+.contact-info .big-heading { font-size: clamp(32px, 4.2vw, 44px); margin-bottom: 16px; }
+.contact-info p { margin: 0 0 6px; font-size: 18px; }
+.contact-info .lead { margin-bottom: 24px; color: var(--ink-soft); }
+.contact-info .phone { font-weight: 700; }
+
+.contact-form {
+  flex: 1 1 500px; min-width: 0;
+  background: var(--deep-teal); color: var(--off-white);
+  border-radius: var(--corner-round); padding: 34px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.contact-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.contact-form .pair { display: flex; flex-wrap: wrap; gap: 16px; }
+.contact-form .pair label { flex: 1 1 200px; }
+.contact-form input, .contact-form textarea {
+  padding: 14px; border: 2px solid transparent; border-radius: var(--button-round);
+  background: var(--off-white); color: var(--ink);
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--sun-gold); }
+.contact-form textarea { resize: vertical; }
+.contact-form button {
+  min-height: 54px; background: var(--sun-gold); color: #1A2222; border: 0;
+  border-radius: var(--button-round); font-family: var(--heading-font);
+  font-weight: 800; letter-spacing: .08em; font-size: 16px; cursor: pointer;
+}
+.contact-form button:hover { filter: brightness(1.06); }
+.hidden-field { display: none; }
+
+/* ---------- Footer ---------- */
+footer { background: var(--darkest-teal); color: #B9C7C1; }
+footer .wrap {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  padding-top: 32px; padding-bottom: 32px; font-size: 14px;
+}
+footer a { color: #B9C7C1; }
+footer a:hover { color: var(--light-gold); }
+
+/* ---------- Phones and small screens ---------- */
+@media (max-width: 700px) {
+  :root { --section-space: 64px; }
+  .hero-sun { width: 340px; height: 340px; right: -150px; top: auto; bottom: 260px; }
+  .stripe span[aria-hidden="true"] { display: none; }
+  .hero-text { padding-bottom: 8px; }
+  .hero-photo img { height: 420px; }
+  .about-photo img { min-height: 340px; }
+  .about-text { padding: 48px 0; }
+  .dee-letter { font-size: 72px; }
+  .contact-form { padding: 24px; }
+}
