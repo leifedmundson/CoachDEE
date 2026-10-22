@@ -198,9 +198,14 @@ input, textarea, select, button { font: inherit; }
 .offer p { margin: 0 0 18px; color: var(--ink-soft); }
 .offer .price { margin: 0; font-weight: 700; color: var(--clay); }
 .offer .price a { color: inherit; }
-.train-video {
-  margin-top: 24px; width: 100%; aspect-ratio: 16 / 9;
-  border-radius: var(--corner-round); background: var(--deep-teal); object-fit: cover;
+
+/* ---------- Full-width video ---------- */
+.video-section { background: var(--deep-teal); line-height: 0; }
+.video-section video {
+  width: 100%;
+  height: min(85vh, 56.25vw);   /* fills the screen width, never taller than the screen */
+  min-height: 320px;
+  object-fit: cover;
 }
 
 /* ---------- Contact ---------- */
