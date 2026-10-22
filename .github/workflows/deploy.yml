@@ -1,0 +1,53 @@
+# Publishes the website in the `site/` folder to GitHub Pages.
+#
+# It runs automatically every time a change is pushed to the `main` branch,
+# and you can also run it by hand from the repo's "Actions" tab
+# (pick "Deploy site to GitHub Pages" → "Run workflow").
+#
+# One-time setup: in the repo on GitHub, go to Settings → Pages and set
+# "Source" to "GitHub Actions".
+
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only what's needed to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If two pushes happen close together, finish one deploy before starting the
+# next instead of cancelling halfway through.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v6
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Package the site folder
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
