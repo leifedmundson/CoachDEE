@@ -21,7 +21,7 @@
   <!-- Fonts (from Google Fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- The look of the site lives in style.css -->
   <link rel="stylesheet" href="style.css">
@@ -75,62 +75,39 @@
 
 
 <!-- ============================================================
-     THE D.E.E. (Diet, Exercise, Empowerment cards)
+     ABOUT DANIELLE (bio + numbers, framed photo)
      ============================================================ -->
-<section id="dee" class="wrap section">
-  <p class="eyebrow">Danielle Elizabeth Edmundson</p>
-  <h2 class="big-heading dee-heading">Her initials. Her method.</h2>
-
-  <div class="card-grid">
-    <div class="dee-card">
-      <div class="dee-letter" aria-hidden="true">D</div>
-      <h3>DIET</h3>
-      <p>We have to eat. What, how much and how often is where guidance makes the difference.</p>
-    </div>
-    <div class="dee-card sage">
-      <div class="dee-letter" aria-hidden="true">E</div>
-      <h3>EXERCISE</h3>
-      <p>Functional movement and resistance training, taught with mastery and adapted to your body.</p>
-    </div>
-    <div class="dee-card clay">
-      <div class="dee-letter" aria-hidden="true">E</div>
-      <h3>EMPOWERMENT</h3>
-      <p>Moving with confidence — through life's transitions, big and small.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     ABOUT DANIELLE (photo + bio + numbers)
-     ============================================================ -->
-<section class="about" aria-label="About Danielle">
-  <div class="wrap">
-    <div class="about-photo">
-      <img src="images/danielle-coaching.jpg" alt="Danielle cueing a client's overhead position" width="1537" height="1023" >
-    </div>
-    <div class="about-text">
-      <p class="eyebrow">Hi, I'm Danielle.</p>
+<section class="wrap section about-framed" aria-label="About Danielle">
+  <div class="framed-text">
+    <p class="eyebrow">Hi, I'm Danielle.</p>
       <p>I've spent over half my life helping people move better, get stronger, and feel more confident in their bodies.</p>
       <p>With over 20 years of coaching experience, I've mastered the art of teaching functional movement and resistance training. I also bring expertise in metabolic health — nutrition, sleep, recovery and nervous system regulation are all essential to lifelong health.</p>
-      <p class="belief">I don't believe in one-size-fits-all training. I believe in the person in front of me.</p>
-      <div class="stats">
+    <p class="belief">I don't believe in one-size-fits-all training. I believe in the person in front of me.</p>
+    <div class="stats">
         <div><div class="stat-number">20+</div><div class="stat-label">years coaching</div></div>
         <div><div class="stat-number">10+</div><div class="stat-label">years gym owner</div></div>
         <div><div class="stat-number">D1</div><div class="stat-label">athlete &amp; coach</div></div>
       </div>
-    </div>
+  </div>
+  <div class="framed-photo">
+    <img src="images/danielle-squat-coaching.jpg" alt="Danielle cueing a client's knee position in an overhead squat" width="1160" height="1023">
   </div>
 </section>
 
 
 <!-- ============================================================
-     CLIENT QUOTE
-     (Change "A Client" to the person's name once they say it's OK.)
+     VIDEO (full-width, plays silently on a loop, client quote on top)
+     To use a different video, replace images/coachdee-homepage.mp4
+     To use a different video, replace images/deadlift-video.mp4
      ============================================================ -->
-<section class="wrap section quote" aria-label="What clients say">
-  <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
-  <p class="who">— A Client</p>
+<section class="video-section video-quote" aria-label="Danielle coaching, and what clients say">
+  <video src="images/coachdee-homepage.mp4" poster="images/coachdee-homepage-preview.jpg"
+         autoplay muted loop playsinline preload="auto"
+         aria-label="Danielle coaching clients through lifts, rows and drills"></video>
+  <figure class="video-card">
+    <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
+    <figcaption>— Mary</figcaption>
+  </figure>
 </section>
 
 
@@ -165,13 +142,29 @@
 
 
 <!-- ============================================================
-     VIDEO (full-width, plays silently on a loop)
-     To use a different video, replace images/deadlift-video.mp4
+     THE D.E.E. (Diet, Exercise, Empowerment cards)
      ============================================================ -->
-<section class="video-section" aria-label="Danielle coaching">
-  <video src="images/deadlift-video.mp4" poster="images/deadlift-video-preview.jpg"
-         autoplay muted loop playsinline preload="auto"
-         aria-label="Danielle coaching a deadlift in her garage gym"></video>
+<section id="dee" class="wrap section">
+  <p class="eyebrow">Danielle Elizabeth Edmundson</p>
+  <h2 class="big-heading dee-heading">Her initials. Her method.</h2>
+
+  <div class="card-grid">
+    <div class="dee-card">
+      <div class="dee-letter" aria-hidden="true">D</div>
+      <h3>DIET</h3>
+      <p>We have to eat. What, how much and how often is where guidance makes the difference.</p>
+    </div>
+    <div class="dee-card teal">
+      <div class="dee-letter" aria-hidden="true">E</div>
+      <h3>EXERCISE</h3>
+      <p>Functional movement and resistance training, taught with mastery and adapted to your body.</p>
+    </div>
+    <div class="dee-card red">
+      <div class="dee-letter" aria-hidden="true">E</div>
+      <h3>EMPOWERMENT</h3>
+      <p>Moving with confidence — through life's transitions, big and small.</p>
+    </div>
+  </div>
 </section>
 
 
@@ -185,12 +178,12 @@
      ============================================================ -->
 <section id="contact" class="wrap section contact">
   <div class="contact-info">
-    <img class="contact-logo" src="images/logo.jpg" alt="Coach Dee — Diet, Exercise, Empowerment" width="900" height="800" >
+    <img class="contact-logo" src="images/CoachDee-Logo-FINAL2.png" alt="Coach Dee — Diet, Exercise, Empowerment" width="1350" height="1200" >
     <h2 class="big-heading">Ready when you are.</h2>
     <p class="lead">Call, text, or send a note — I'll get back to you within a day.</p>
     <p><a class="phone" href="tel:8313457779">831-345-7779</a></p>
     <p><a href="mailto:danielleedmundson@gmail.com">danielleedmundson@gmail.com</a></p>
-    <p><a href="https://instagram.com/coachdanielleee">@coachdanielleee</a></p>
+    <p><a class="ig-link" href="https://instagram.com/coachdanielleee"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.6" cy="6.4" r="0.6" fill="currentColor"></circle></svg><span>@coachdanielleee</span></a></p>
     <p class="lead">Santa Cruz, CA</p>
   </div>
 
