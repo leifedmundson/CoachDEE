@@ -96,18 +96,67 @@
 
 
 <!-- ============================================================
-     VIDEO (full-width, plays silently on a loop, client quote on top)
+     VIDEO (full-width, plays silently on a loop) + CLIENT QUOTES
      To use a different video, replace images/coachdee-homepage.mp4
-     To use a different video, replace images/deadlift-video.mp4
+
+     The quotes take turns on top of the video, one at a time, each
+     in its own spot. Choose a quote's spot with the word after
+     "testimonial": pos-top-left, pos-top-right, pos-bottom-left or
+     pos-bottom-right (never the middle, so the video stays visible).
+     To ADD a quote: copy one <figure> block below and change the words,
+     the name and the spot. To take one out WITHOUT deleting it, add
+     the word hidden:  <figure class="testimonial pos-top-left" hidden>
      ============================================================ -->
 <section class="video-section video-quote" aria-label="Danielle coaching, and what clients say">
   <video src="images/coachdee-homepage.mp4" poster="images/coachdee-homepage-preview.jpg"
          autoplay muted loop playsinline preload="auto"
          aria-label="Danielle coaching clients through lifts, rows and drills"></video>
-  <figure class="video-card">
-    <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
-    <figcaption>— Mary</figcaption>
-  </figure>
+  <div class="video-quotes" aria-label="What clients say">
+    <figure class="testimonial pos-bottom-left">
+      <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
+      <figcaption>— Mary</figcaption>
+    </figure>
+
+    <figure class="testimonial pos-top-right">
+      <blockquote>“I was intimidated by strength training, but Danielle has completely changed that. She has an incredible ability to meet you where you are, challenge you just enough, and make you feel successful along the way. I’m stronger than I thought I could be.”</blockquote>
+      <figcaption>— Susan</figcaption>
+    </figure>
+
+    <figure class="testimonial pos-bottom-right">
+      <blockquote>“Danielle really pays attention to the whole person. She understands that fitness isn’t just about exercise — it’s about how you feel, how you move, and how you take care of yourself. She’s knowledgeable, patient, and genuinely invested in helping you succeed.”</blockquote>
+      <figcaption>— Drew</figcaption>
+    </figure>
+
+    <!-- To add another quote, copy one of the <figure> blocks above,
+         paste it here, then change the words, the name and its spot. -->
+  </div>
+</section>
+
+
+<!-- ============================================================
+     THE D.E.E. (Diet, Exercise, Empowerment cards)
+     ============================================================ -->
+<section id="dee" class="wrap section">
+  <p class="eyebrow">Danielle Elizabeth Edmundson</p>
+  <h2 class="big-heading dee-heading">Her initials. Her method.</h2>
+
+  <div class="card-grid">
+    <div class="dee-card">
+      <div class="dee-letter" aria-hidden="true">D</div>
+      <h3>DIET</h3>
+      <p>We have to eat. What, how much and how often is where guidance makes the difference.</p>
+    </div>
+    <div class="dee-card teal">
+      <div class="dee-letter" aria-hidden="true">E</div>
+      <h3>EXERCISE</h3>
+      <p>Functional movement and resistance training, taught with mastery and adapted to your body.</p>
+    </div>
+    <div class="dee-card red">
+      <div class="dee-letter" aria-hidden="true">E</div>
+      <h3>EMPOWERMENT</h3>
+      <p>Moving with confidence — through life's transitions, big and small.</p>
+    </div>
+  </div>
 </section>
 
 
@@ -142,33 +191,6 @@
 
 
 <!-- ============================================================
-     THE D.E.E. (Diet, Exercise, Empowerment cards)
-     ============================================================ -->
-<section id="dee" class="wrap section">
-  <p class="eyebrow">Danielle Elizabeth Edmundson</p>
-  <h2 class="big-heading dee-heading">Her initials. Her method.</h2>
-
-  <div class="card-grid">
-    <div class="dee-card">
-      <div class="dee-letter" aria-hidden="true">D</div>
-      <h3>DIET</h3>
-      <p>We have to eat. What, how much and how often is where guidance makes the difference.</p>
-    </div>
-    <div class="dee-card teal">
-      <div class="dee-letter" aria-hidden="true">E</div>
-      <h3>EXERCISE</h3>
-      <p>Functional movement and resistance training, taught with mastery and adapted to your body.</p>
-    </div>
-    <div class="dee-card red">
-      <div class="dee-letter" aria-hidden="true">E</div>
-      <h3>EMPOWERMENT</h3>
-      <p>Moving with confidence — through life's transitions, big and small.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
      CONTACT (info + message form)
      Messages are emailed to Danielle by FormSubmit (formsubmit.co).
      The very first message triggers a one-time "activate this form"
@@ -176,7 +198,8 @@
      To send messages somewhere else, change the email in the
      form's action="..." address below.
      ============================================================ -->
-<section id="contact" class="wrap section contact">
+<section id="contact" class="contact-band">
+<div class="wrap section contact">
   <div class="contact-info">
     <img class="contact-logo" src="images/CoachDee-Logo-FINAL2.png" alt="Coach Dee — Diet, Exercise, Empowerment" width="1350" height="1200" >
     <h2 class="big-heading">Ready when you are.</h2>
@@ -210,6 +233,7 @@
     </label>
     <button type="submit">SEND IT</button>
   </form>
+</div>
 </section>
 
 
@@ -227,6 +251,55 @@
 <script>
   document.getElementById('thanks-page').value =
     new URL('thanks.html', window.location.href).href;
+</script>
+
+<!-- Rotate the client quotes on the video, one at a time. -->
+<script>
+(function () {
+  var box = document.querySelector('.video-quotes');
+  if (!box) return;
+  var slides = Array.prototype.slice.call(box.querySelectorAll('.testimonial:not([hidden])'));
+  var SECONDS = 8;                       /* how long each quote shows */
+  var current = 0, timer = null, paused = false;
+  if (!slides.length) return;
+  slides[0].classList.add('is-active');
+  if (slides.length < 2) return;
+
+  /* Each card gets its own row of dots, so the dots move with the quote. */
+  slides.forEach(function (slide, s) {
+    var row = document.createElement('div');
+    row.className = 'testimonial-dots';
+    slides.forEach(function (_, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Show quote ' + (i + 1) + ' of ' + slides.length);
+      if (i === s) b.setAttribute('aria-current', 'true');
+      b.addEventListener('click', function () { show(i, true); restart(); });
+      row.appendChild(b);
+    });
+    slide.appendChild(row);
+  });
+
+  function show(i, fromClick) {
+    slides[current].classList.remove('is-active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    if (fromClick) {                     /* keep keyboard focus on the new card's dot */
+      var b = slides[current].querySelectorAll('.testimonial-dots button')[current];
+      if (b) b.focus({ preventScroll: true });
+    }
+  }
+  function restart() {
+    clearInterval(timer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(function () { if (!paused) show(current + 1); }, SECONDS * 1000);
+  }
+  box.addEventListener('mouseover', function (e) { if (e.target.closest('.testimonial')) paused = true; });
+  box.addEventListener('mouseout',  function (e) { if (e.target.closest('.testimonial')) paused = false; });
+  box.addEventListener('focusin',  function () { paused = true; });
+  box.addEventListener('focusout', function () { paused = false; });
+  restart();
+})();
 </script>
 
 </body>
