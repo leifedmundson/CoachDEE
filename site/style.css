@@ -341,6 +341,10 @@ footer a:hover { color: var(--warm-yellow); }
 }
 .framed-text .stat-number { color: var(--barn-red); }
 .framed-text .stat-label { color: var(--ink-soft); }
+/* The numbers sit in one row of four; on narrow screens, two by two. */
+.framed-text .stats { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 18px 32px; }
+.framed-text .stat-label { max-width: 11ch; line-height: 1.35; margin-top: 4px; }
+@media (max-width: 560px) { .framed-text .stats { grid-template-columns: repeat(2, auto); } }
 .framed-photo { flex: 1 1 420px; min-width: 0; position: relative; padding: 0 18px 18px 0; }
 .framed-photo::before {             /* antique-gold frame offset behind the photo */
   content: ""; position: absolute; inset: 18px 0 0 18px;
