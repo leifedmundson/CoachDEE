@@ -16,9 +16,9 @@
   <meta property="og:image" content="images/danielle-portrait.jpg">
   <meta property="og:type" content="website">
 
-  <!-- Browser-tab icon (favicon.svg), with picture versions for older browsers and phones -->
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <!-- Browser-tab icon, plus a larger copy and a phone home-screen version -->
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="images/favicon.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
   <!-- Fonts (from Google Fonts) -->
@@ -101,38 +101,54 @@
 
 <!-- ============================================================
      VIDEO (full-width, plays silently on a loop) + CLIENT QUOTES
-     To use a different video, replace images/coachdee-homepage.mp4
+     To use a different video, replace images/coachdee-broll-2.mp4
 
-     The quotes take turns on top of the video, one at a time, each
-     in its own spot. Choose a quote's spot with the word after
-     "testimonial": pos-top-left, pos-top-right, pos-bottom-left or
-     pos-bottom-right (never the middle, so the video stays visible).
-     To ADD a quote: copy one <figure> block below and change the words,
-     the name and the spot. To take one out WITHOUT deleting it, add
-     the word hidden:  <figure class="testimonial pos-top-left" hidden>
+     Each quote appears at a set time in the video and stays until the
+     next one starts. Set the time with data-start="minutes:seconds".
+     To make a quote disappear before the next one (or before the video
+     ends), also give it data-end="minutes:seconds".
+     Choose its spot with pos-top-left, pos-top-right, pos-bottom-left
+     or pos-bottom-right. Add style-light for the ivory color version.
+     To take a quote out WITHOUT deleting it, add the word hidden:
+       <figure class="testimonial pos-bottom-left" data-start="0:22" hidden>
      ============================================================ -->
 <section class="video-section video-quote" aria-label="Danielle coaching, and what clients say">
-  <video src="images/coachdee-homepage.mp4" poster="images/coachdee-homepage-preview.jpg"
+  <video src="images/coachdee-broll-2.mp4" poster="images/coachdee-broll-2-preview.jpg"
          autoplay muted loop playsinline preload="auto"
-         aria-label="Danielle coaching clients through lifts, rows and drills"></video>
+         aria-label="Danielle coaching clients through balance work, lifts, rows and drills"></video>
   <div class="video-quotes" aria-label="What clients say">
-    <figure class="testimonial pos-bottom-left">
+    <!-- 0:00 to 0:09: Fred, part 1. Lower left, teal -->
+    <figure class="testimonial pos-bottom-left" data-start="0:00">
+      <blockquote>“Danielle is an amazing coach. I had been doing CrossFit for over 10 years but after my first 1:1 with her, I knew I had much to learn and relearn. She’s great at breaking down the fundamentals and mechanics of movements…”</blockquote>
+      <figcaption>— Fred</figcaption>
+    </figure>
+
+    <!-- 0:09 to 0:18: Fred, part 2. Lower left, ivory -->
+    <figure class="testimonial pos-bottom-left style-light" data-start="0:09">
+      <blockquote>“…I have been able to open up to Danielle about goals and aspirations I thought I would never achieve and we are working through the list! I appreciate and enjoy every session I have with her.”</blockquote>
+      <figcaption>— Fred</figcaption>
+    </figure>
+
+    <!-- 0:18 to 0:49: Mary. Lower right, teal -->
+    <figure class="testimonial pos-bottom-right" data-start="0:18">
       <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
       <figcaption>— Mary</figcaption>
     </figure>
 
-    <figure class="testimonial pos-top-right">
+    <!-- 0:49 to 1:20: Susan. Lower right, ivory. No card from 1:20 to the end (the logo) -->
+    <figure class="testimonial pos-bottom-right style-light" data-start="0:49" data-end="1:20">
       <blockquote>“I was intimidated by strength training, but Danielle has completely changed that. She has an incredible ability to meet you where you are, challenge you just enough, and make you feel successful along the way. I’m stronger than I thought I could be.”</blockquote>
       <figcaption>— Susan</figcaption>
     </figure>
 
-    <figure class="testimonial pos-bottom-right">
+    <!-- Not shown right now: Drew. To use it, give it a time and delete the word "hidden". -->
+    <figure class="testimonial pos-bottom-right style-light" data-start="1:05" hidden>
       <blockquote>“Danielle really pays attention to the whole person. She understands that fitness isn’t just about exercise — it’s about how you feel, how you move, and how you take care of yourself. She’s knowledgeable, patient, and genuinely invested in helping you succeed.”</blockquote>
       <figcaption>— Drew</figcaption>
     </figure>
 
     <!-- To add another quote, copy one of the <figure> blocks above,
-         paste it here, then change the words, the name and its spot. -->
+         paste it here, then change the words, the name, the time and the spot. -->
   </div>
 </section>
 
@@ -260,52 +276,69 @@
     new URL('thanks.html', window.location.href).href;
 </script>
 
-<!-- Rotate the client quotes on the video, one at a time. -->
+<!-- Show each client quote at its set time in the video (data-start). -->
 <script>
 (function () {
   var box = document.querySelector('.video-quotes');
+  var video = document.querySelector('.video-quote video');
   if (!box) return;
   var slides = Array.prototype.slice.call(box.querySelectorAll('.testimonial:not([hidden])'));
-  var SECONDS = 8;                       /* how long each quote shows */
-  var current = 0, timer = null, paused = false;
   if (!slides.length) return;
-  slides[0].classList.add('is-active');
-  if (slides.length < 2) return;
 
-  /* Each card gets its own row of dots, so the dots move with the quote. */
+  /* "1:05" -> 65 seconds */
+  function toSeconds(text) {
+    return String(text || '0').split(':').reduce(function (total, part) {
+      return total * 60 + (parseFloat(part) || 0);
+    }, 0);
+  }
+  var starts = slides.map(function (s) { return toSeconds(s.getAttribute('data-start')); });
+  var ends = slides.map(function (s) {
+    return s.hasAttribute('data-end') ? toSeconds(s.getAttribute('data-end')) : Infinity;
+  });
+
+  var current = -1;                      /* -1 means no card showing */
+  function show(i) {
+    if (i === current) return;
+    if (current >= 0) slides[current].classList.remove('is-active');
+    current = i;
+    if (i >= 0) slides[i].classList.add('is-active');
+  }
+  /* the quote whose start time has most recently passed,
+     or -1 if that quote has a data-end that has also passed */
+  function quoteAt(t) {
+    var pick = 0, best = -1;
+    starts.forEach(function (start, i) { if (start <= t && start > best) { best = start; pick = i; } });
+    return t >= ends[pick] ? -1 : pick;
+  }
+  show(quoteAt(0));
+  if (slides.length < 2 || !video) return;
+
+  /* Each card gets a row of dots; a dot jumps the video to that quote. */
   slides.forEach(function (slide, s) {
     var row = document.createElement('div');
     row.className = 'testimonial-dots';
-    slides.forEach(function (_, i) {
+    slides.forEach(function (other, i) {
       var b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', 'Show quote ' + (i + 1) + ' of ' + slides.length);
       if (i === s) b.setAttribute('aria-current', 'true');
-      b.addEventListener('click', function () { show(i, true); restart(); });
+      b.addEventListener('click', function () {
+        try { video.currentTime = starts[i] + 0.05; } catch (e) {}
+        show(i);
+        var next = slides[i].querySelectorAll('.testimonial-dots button')[i];
+        if (next) next.focus({ preventScroll: true });
+      });
       row.appendChild(b);
     });
     slide.appendChild(row);
   });
 
-  function show(i, fromClick) {
-    slides[current].classList.remove('is-active');
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add('is-active');
-    if (fromClick) {                     /* keep keyboard focus on the new card's dot */
-      var b = slides[current].querySelectorAll('.testimonial-dots button')[current];
-      if (b) b.focus({ preventScroll: true });
-    }
+  /* Follow the video's clock closely so quotes change right on time. */
+  function follow() {
+    show(quoteAt(video.currentTime || 0));
+    window.requestAnimationFrame(follow);
   }
-  function restart() {
-    clearInterval(timer);
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    timer = setInterval(function () { if (!paused) show(current + 1); }, SECONDS * 1000);
-  }
-  box.addEventListener('mouseover', function (e) { if (e.target.closest('.testimonial')) paused = true; });
-  box.addEventListener('mouseout',  function (e) { if (e.target.closest('.testimonial')) paused = false; });
-  box.addEventListener('focusin',  function () { paused = true; });
-  box.addEventListener('focusout', function () { paused = false; });
-  restart();
+  window.requestAnimationFrame(follow);
 })();
 </script>
 
