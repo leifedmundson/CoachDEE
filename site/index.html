@@ -78,20 +78,45 @@
 
 
 <!-- ============================================================
-     ABOUT DANIELLE (bio + numbers, framed photo)
+     ABOUT DANIELLE (bio, "Read Danielle's story" for the rest, numbers, framed photo)
+     The first paragraphs always show. Everything inside <details> shows
+     when a visitor clicks "Read Danielle's story".
      ============================================================ -->
-<section class="wrap section about-framed" aria-label="About Danielle">
+<section class="wrap section about-framed" aria-labelledby="about-heading">
   <div class="framed-text">
-    <p class="eyebrow">Hi, I'm Danielle.</p>
-      <p>I've spent over half my life helping people move better, get stronger, and feel more confident in their bodies.</p>
-      <p>With over 20 years of coaching experience, I've mastered the art of teaching functional movement and resistance training. I also bring expertise in metabolic health — nutrition, sleep, recovery and nervous system regulation are all essential to lifelong health.</p>
+    <p class="eyebrow">Hi, I'm Danielle. People call me Coach D.</p>
+    <h2 class="big-heading about-heading" id="about-heading">More Than a Workout. More Than a Coach.</h2>
+    <p>I bring the experience of a high-level athlete, the expertise of a lifelong coach, and the perspective of a real person navigating real life. I know how to challenge you, how to teach you, and how to meet you exactly where you are. And I genuinely love doing it.</p>
+    <p>From competing as a Division 1 scholarship athlete to coaching collegiate sports, owning a CrossFit gym, and raising 2 daughters, I’ve spent more than 20 years helping people move, learn, and grow. Fitness has given me so much more than physical strength; it's given me purpose.</p>
     <p class="belief">I don't believe in one-size-fits-all training. I believe in the person in front of me.</p>
-    <div class="stats">
-        <div><div class="stat-number">20+</div><div class="stat-label">years coaching</div></div>
-        <div><div class="stat-number">10+</div><div class="stat-label">years gym owner</div></div>
-        <div><div class="stat-number">D1</div><div class="stat-label">athlete &amp; coach</div></div>
-        <div><div class="stat-number">500hr</div><div class="stat-label">yoga teacher training</div></div>
+
+    <details class="story">
+      <summary><span class="more">Read Danielle's story</span><span class="less">Show less</span></summary>
+      <div class="story-body">
+        <p>I have learned that fitness is about so much more than physical performance.</p>
+        <p class="story-list">It's about confidence. Connection. Resilience. Feeling good in your body. Discovering your capabilities. And finding something that makes your life better.</p>
+        <p>I've experienced the thrill of competition, the discipline of high-level training, the demands of motherhood, and the humbling reality that our bodies and lives are always changing.</p>
+        <p>Life is ever changing and seasons come and go. I bring that perspective, along with decades of technical knowledge, creativity, and genuine care, to every session.</p>
+        <p>You might be an experienced athlete, someone who hasn't exercised in years, or someone who isn't quite sure where to begin. You might have big goals or simply want to feel better.</p>
+        <p class="belief">Wherever you are, we'll start there.</p>
+        <p>We'll work hard, learn a lot, laugh, and find what makes movement meaningful for you.</p>
+        <p>I'll bring the knowledge, the experience, the creativity, and the care. I'll teach you, challenge you, listen to you, and together we will adjust along the way.</p>
+        <p>And my hope is that you'll leave feeling a little stronger, a little more confident, and a whole lot more excited.</p>
+        <div class="story-close">
+          <p>My favorite thing to hear after a session?</p>
+          <p class="story-quote">“When can we do that again?”</p>
+          <p>Because that's when I know we're building something that lasts.</p>
+        </div>
       </div>
+    </details>
+
+    <div class="stats">
+      <div><div class="stat-number">20+</div><div class="stat-label">years coaching</div></div>
+      <div><div class="stat-number">10+</div><div class="stat-label">years gym owner</div></div>
+      <div><div class="stat-number">D1</div><div class="stat-label">athlete &amp; coach</div></div>
+      <div><div class="stat-number">500hr</div><div class="stat-label">yoga teacher training</div></div>
+      <div><div class="stat-number">L2</div><div class="stat-label">CrossFit Level 2, MetFix</div></div>
+    </div>
   </div>
   <div class="framed-photo">
     <img src="images/danielle-squat-coaching.jpg" alt="Danielle cueing a client's knee position in an overhead squat" width="1160" height="1023">
@@ -106,6 +131,7 @@
      Each quote appears at a set time in the video and stays until the
      next one starts. Set the time with data-start="minutes:seconds";
      data-end="minutes:seconds" makes a quote leave early.
+     When no quote is on, the panel is left blank.
      The panel takes its colors from the quote showing:
        (nothing extra) = teal    style-light = ivory    style-red = barn red
      To take a quote out WITHOUT deleting it, add the word hidden.
@@ -133,24 +159,28 @@
 
       <!-- 0:18 to 0:49: Mary. Ivory -->
       <figure class="testimonial style-light" data-start="0:18">
-        <blockquote>“Danielle is a relationship-driven coach. She brings energy, expertise and genuine care to every session. She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
+        <blockquote>“She is so much more than a personal trainer. My time with her is the best hour of my day.”</blockquote>
         <figcaption>— Mary</figcaption>
       </figure>
 
-      <!-- 0:49 to 1:20: Susan. Barn red. Then no quote until the end (the logo) -->
-      <figure class="testimonial style-red" data-start="0:49" data-end="1:20">
+      <!-- 0:49 to 1:05: Susan. Barn red -->
+      <figure class="testimonial style-red" data-start="0:49">
         <blockquote>“I was intimidated by strength training, but Danielle has completely changed that. She has an incredible ability to meet you where you are, challenge you just enough, and make you feel successful along the way. I’m stronger than I thought I could be.”</blockquote>
         <figcaption>— Susan</figcaption>
       </figure>
 
+      <!-- 1:05 to 1:20: Emily. Teal. Then no quote until the end (the logo) -->
+      <figure class="testimonial" data-start="1:05" data-end="1:20">
+        <blockquote>“Danielle brings energy, expertise and genuine care to every session.”</blockquote>
+        <figcaption>— Emily</figcaption>
+      </figure>
+
       <!-- Not shown right now: Drew. To use it, give it a time and delete the word "hidden". -->
-      <figure class="testimonial style-light" data-start="1:05" hidden>
+      <figure class="testimonial style-light" data-start="1:20" hidden>
         <blockquote>“Danielle really pays attention to the whole person. She understands that fitness isn’t just about exercise — it’s about how you feel, how you move, and how you take care of yourself. She’s knowledgeable, patient, and genuinely invested in helping you succeed.”</blockquote>
         <figcaption>— Drew</figcaption>
       </figure>
 
-      <!-- Shown when no quote is on (here, 1:20 to the end) -->
-      <div class="quote-rest" aria-hidden="true">Diet · Exercise · Empowerment</div>
     </div>
     <div class="vq-progress" aria-hidden="true"><span></span></div>
   </div>
@@ -183,7 +213,7 @@
       <p>The confidence to face life’s challenges and the ability to overcome them.</p>
     </div>
   </div>
-  <p class="equation-intro">Diet and exercise are the most powerful tools we have to improve our lives, but getting them right is a lifelong journey. Danielle is your expert guide and trusted ally along the way, providing the knowledge, encouragement, and accountability to keep you moving forward.</p>
+  <p class="equation-intro">Diet and exercise are the most powerful tools we have to improve our health—getting them right is a lifelong journey. Danielle is your expert guide and trusted ally, providing knowledge, encouragement, and accountability.</p>
 </section>
 
 
@@ -213,6 +243,16 @@
         <p class="price"><a href="#contact">Ask about pricing</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COACHING STATEMENT (teal band before Contact)
+     ============================================================ -->
+<section class="statement" aria-label="Danielle's coaching philosophy">
+  <div class="wrap">
+    <p>Great coaching isn't just about what you accomplish in a session. It's about how you feel when you leave—and how excited you are to come back.</p>
   </div>
 </section>
 
@@ -287,7 +327,6 @@
   if (!root) return;
   var video = root.querySelector('video');
   var slides = Array.prototype.slice.call(root.querySelectorAll('.testimonial:not([hidden])'));
-  var rest = root.querySelector('.quote-rest');
   var bar = root.querySelector('.vq-progress span');
   if (!slides.length) return;
 
@@ -323,7 +362,7 @@
     if (current >= 0) slides[current].classList.remove('is-active');
     current = i;
     if (i >= 0) slides[i].classList.add('is-active');
-    rest.classList.toggle('is-active', i < 0);
+    root.classList.toggle('is-empty', i < 0);          /* no quote: the panel stays blank */
     /* the panel takes the colors of the quote showing */
     var c = i >= 0 ? slides[i].classList : null;
     root.classList.toggle('tone-light', !!c && c.contains('style-light'));
