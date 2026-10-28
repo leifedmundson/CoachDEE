@@ -351,17 +351,19 @@ footer a:hover { color: var(--warm-yellow); }
 
 /* ---------- About Danielle: bio, story, numbers, framed photo ---------- */
 .about-framed { display: flex; flex-wrap: wrap; gap: 48px 72px; align-items: flex-start; }
-.about-heading { margin-bottom: 22px; font-size: clamp(30px, 3.6vw, 44px); text-wrap: balance; }
+.about-intro { margin-bottom: 20px; }
+.about-intro span { white-space: nowrap; }   /* if the line wraps, it breaks between the two sentences */
+.about-heading { margin-bottom: 12px; font-size: clamp(30px, 3.6vw, 44px); text-wrap: balance; }
 .framed-text { flex: 1 1 420px; min-width: 0; }
 .framed-text p { margin: 0 0 18px; font-size: 18px; color: var(--ink-soft); max-width: 60ch; }
 .framed-text .belief {
   margin: 8px 0 28px; font-family: var(--heading-font); font-weight: var(--heading-weight);
   font-size: 26px; line-height: 1.3; color: var(--deep-teal);
 }
-.framed-text .stat-number { color: var(--barn-red); }
-.framed-text .stat-label { color: var(--ink-soft); }
+.about-aside .stat-number { color: var(--barn-red); }
+.about-aside .stat-label { color: var(--ink-soft); }
 /* "Read Danielle's story": the rest of the bio folds away */
-.story { margin: 4px 0 30px; }
+.story { margin: 0 0 22px; }
 .story summary {
   display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer;
   font-family: var(--heading-font); font-weight: var(--heading-weight); font-size: 15px;
@@ -387,13 +389,15 @@ footer a:hover { color: var(--warm-yellow); }
 @media (prefers-reduced-motion: reduce) { .story summary::after { transition: none; } }
 
 /* The numbers: one row of five on wide screens, three across below that. */
-.framed-text .stats { display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 18px 28px; }
-.framed-text .stat-label { max-width: 11ch; line-height: 1.35; margin-top: 4px; }
-@media (max-width: 1240px) { .framed-text .stats { grid-template-columns: repeat(3, auto); } }
-@media (max-width: 420px) { .framed-text .stats { gap: 16px 20px; } .framed-text .stat-number { font-size: 32px; } }
-.framed-photo { flex: 1 1 420px; min-width: 0; position: relative; padding: 0 18px 18px 0; }
+.about-aside .stats { display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 18px 28px; margin-top: 36px; }
+.about-aside .stat-label { max-width: 11ch; line-height: 1.35; margin-top: 4px; }
+@media (max-width: 1240px) { .about-aside .stats { grid-template-columns: repeat(3, auto); } }
+@media (max-width: 420px) { .about-aside .stats { gap: 16px 20px; } .about-aside .stat-number { font-size: 32px; } }
+/* right-hand column: the framed photo with the numbers under it */
+.about-aside { flex: 1 1 420px; min-width: 0; }
+.framed-photo { position: relative; padding: 0 18px 18px 0; }
 /* on wide screens the photo travels alongside the bio while it is read */
-@media (min-width: 941px) { .framed-photo { position: sticky; top: 32px; } }
+@media (min-width: 941px) { .about-aside { position: sticky; top: 32px; } }
 .framed-photo::before {             /* antique-gold frame offset behind the photo */
   content: ""; position: absolute; inset: 18px 0 0 18px;
   border: 3px solid var(--antique-gold); border-radius: var(--corner-round);
