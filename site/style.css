@@ -428,3 +428,15 @@ footer a:hover { color: var(--warm-yellow); }
   .dee-letter { font-size: 72px; }
   .contact-form { padding: 24px; }
 }
+
+/* ---------- Photo strip (four photos between "How we train" and the teal statement) ---------- */
+.photo-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; background: var(--pure-white); }
+.photo-strip img { width: 100%; height: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+@media (max-width: 700px) { .photo-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* "How we train" cards: price line sits at the bottom so the cards line up */
+.offer { display: flex; flex-direction: column; }
+.offer .price { margin-top: auto; }
+.train .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .train .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px)  { .train .card-grid { grid-template-columns: 1fr; } }
