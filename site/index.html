@@ -18,6 +18,68 @@
   <meta property="og:url" content="https://coachdee.fit/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://coachdee.fit/">
+  <!-- Business details for Google (hidden from visitors). Keep the phone,
+       prices and links here in step with the page. When the Google Business
+       Profile exists, add its link to the "sameAs" list. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://coachdee.fit/#business",
+    "name": "Coach DEE",
+    "alternateName": "Coach D.E.E. (Diet, Exercise, Empowerment)",
+    "description": "Personal training and coaching in Santa Cruz, CA. Danielle Edmundson is a functional movement and metabolic health specialist with 20+ years as a coach and personal trainer, offering 1:1 coaching, small-group training, group classes, and online programming and nutrition guidance.",
+    "url": "https://coachdee.fit/",
+    "image": "https://coachdee.fit/images/danielle-portrait.jpg",
+    "logo": "https://coachdee.fit/images/CoachDee-Logo-FINAL2.png",
+    "telephone": "+1-831-345-7779",
+    "email": "danielleedmundson@gmail.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Santa Cruz",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Santa Cruz, CA"
+    },
+    "sameAs": [
+      "https://instagram.com/coachdanielleee"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Danielle Elizabeth Edmundson",
+      "jobTitle": "Personal Trainer and Coach",
+      "url": "https://coachdee.fit/"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "name": "1:1 Coaching",
+        "price": "150",
+        "priceCurrency": "USD",
+        "description": "Private personal training, priced per hour."
+      },
+      {
+        "@type": "Offer",
+        "name": "Small Group Training",
+        "description": "Coaching for two or three people, or a team. From $200, varies by group."
+      },
+      {
+        "@type": "Offer",
+        "name": "Group Classes",
+        "description": "Occasional drop-in classes at local CrossFit gyms."
+      },
+      {
+        "@type": "Offer",
+        "name": "Online Coaching & Nutrition",
+        "description": "Programming and metabolic health guidance, price varies."
+      }
+    ]
+  }
+  </script>
 
   <!-- Browser-tab icon, plus a larger copy and a phone home-screen version -->
   <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
@@ -139,8 +201,10 @@
      ============================================================ -->
 <section class="vq-split" aria-label="Danielle coaching, and what clients say">
   <div class="vq-split-video">
-    <video src="images/coachdee-broll-2.mp4" poster="images/coachdee-broll-2-preview.jpg"
-         autoplay muted loop playsinline preload="auto"
+    <!-- The video only starts loading when a visitor scrolls near it (keeps the page fast).
+         To change the video, change data-src below. -->
+    <video data-src="images/coachdee-broll-2.mp4" poster="images/coachdee-broll-2-preview.jpg"
+         muted loop playsinline preload="none"
          aria-label="Danielle coaching clients through balance work, lifts, rows and drills"></video>
   </div>
   <div class="vq-panel">
@@ -344,6 +408,23 @@
 <script>
   document.getElementById('thanks-page').value =
     new URL('thanks.html', window.location.href).href;
+</script>
+
+<!-- Start the video when it's about to scroll into view; pause it when it's off screen. -->
+<script>
+(function () {
+  var video = document.querySelector('.vq-split-video video');
+  if (!video) return;
+  video.muted = true;
+  function load() {
+    if (!video.getAttribute('src')) { video.src = video.getAttribute('data-src'); }
+  }
+  function play() { load(); var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+  if (!('IntersectionObserver' in window)) { play(); return; }
+  new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) play(); else if (video.getAttribute('src')) video.pause(); });
+  }, { rootMargin: '300px 0px' }).observe(video);
+})();
 </script>
 
 <!-- Show each client quote at its set time in the video (data-start / data-end). -->
