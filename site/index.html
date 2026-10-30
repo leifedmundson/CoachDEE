@@ -349,11 +349,10 @@
 
 <!-- ============================================================
      CONTACT (info + message form)
-     Messages are emailed to Danielle by FormSubmit (formsubmit.co).
-     The very first message triggers a one-time "activate this form"
-     email to Danielle — she clicks it once, and it works from then on.
-     To send messages somewhere else, change the email in the
-     form's action="..." address below.
+     Messages are emailed to Danielle by Web3Forms (web3forms.com).
+     The access_key below is tied to her Web3Forms account and decides
+     which inbox gets the messages. To change the inbox, sign in at
+     web3forms.com, or create a new key there and paste it below.
      ============================================================ -->
 <section id="contact" class="contact-band">
 <div class="wrap section contact">
@@ -367,12 +366,13 @@
     <p class="lead">Santa Cruz, CA</p>
   </div>
 
-  <form class="contact-form" method="POST" action="https://formsubmit.co/danielleedmundson@gmail.com">
-    <!-- Settings for FormSubmit (hidden from visitors) -->
-    <input type="hidden" name="_subject" value="New message from coachdee.fit">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="" id="thanks-page">
-    <p class="hidden-field"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
+  <form class="contact-form" method="POST" action="https://api.web3forms.com/submit">
+    <!-- Settings for Web3Forms (hidden from visitors) -->
+    <input type="hidden" name="access_key" value="6b8cb14c-e06e-4262-809c-1b9738d6eac5">
+    <input type="hidden" name="subject" value="New message from coachdee.fit">
+    <input type="hidden" name="from_name" value="coachdee.fit contact form">
+    <input type="hidden" name="redirect" value="" id="thanks-page">
+    <p class="hidden-field"><label>Leave this unchecked <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label></p>
 
     <label>Name
       <input type="text" name="name" autocomplete="name" required>
