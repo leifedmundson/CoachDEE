@@ -446,3 +446,24 @@ footer a:hover { color: var(--warm-yellow); }
 .train .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .train .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px)  { .train .card-grid { grid-template-columns: 1fr; } }
+
+/* ---------- FAQ (click-to-open questions, above the contact form) ---------- */
+.faq { background: var(--warm-ivory); }
+.faq .big-heading { margin-bottom: 28px; }
+.faq-list { max-width: 820px; border-top: 1px solid var(--antique-gold); }
+.faq-item { border-bottom: 1px solid var(--antique-gold); }
+.faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 56px; padding: 14px 0; cursor: pointer; list-style: none;
+  font-family: var(--heading-font); font-weight: 500; font-size: 18px; line-height: 1.35; color: var(--deep-teal);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {                       /* chevron that flips when open */
+  content: ""; flex-shrink: 0; width: 9px; height: 9px; margin: -4px 4px 0 0;
+  border-right: 2px solid var(--barn-red); border-bottom: 2px solid var(--barn-red); transform: rotate(45deg);
+}
+.faq-item[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+.faq-item summary:hover { color: var(--barn-red); }
+.faq-item summary:focus-visible { outline: 2px solid var(--barn-red); outline-offset: 4px; border-radius: 4px; }
+.faq-item p { margin: 0 0 20px; max-width: 68ch; font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
+@media (max-width: 600px) { .faq-item summary { font-size: 16.5px; } .faq-item p { font-size: 16px; } }
