@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liability Waiver | Coach DEE</title>
+  <meta name="description" content="Read and sign the Coach DEE liability waiver online before your first training session with Danielle Edmundson.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="images/favicon.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="waiver-page">
+
+<!-- ============================================================
+     LIABILITY WAIVER PAGE  (coachdee.fit/waiver.html)
+
+     HOW IT WORKS
+     Clients read the waiver, fill in their details, initial each
+     section and sign with a finger or mouse. When they press
+     "Sign waiver", everything is sent to a small program in
+     Danielle's Google account, which saves a PDF to her Google
+     Drive, adds a row to a Google Sheet, emails the client their
+     copy, and emails Danielle a "New signed waiver" notice.
+
+     TO EDIT THE WAIVER WORDING
+     Change the text inside the <section class="w-clause"> blocks
+     below. The exact words on this page are what get saved in each
+     signed PDF. When you change the wording, also change the
+     version date in WAIVER_VERSION (near the bottom of the page).
+
+     THE GOOGLE CONNECTION
+     WAIVER_ENDPOINT (near the bottom of the page) holds the web
+     address of the Google program (see the waiver-google folder). Until it's filled in,
+     the page shows the waiver but can't send signatures.
+     ============================================================ -->
+
+<header class="hero w-hero">
+  <div class="wrap topbar">
+    <a href="index.html" class="brand">COACH DEE</a>
+    <nav aria-label="Main">
+      <a href="index.html#train">Training</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap w-hero-body">
+    <p class="eyebrow">Before your first session</p>
+    <h1>Liability Waiver</h1>
+    <p class="hero-lead">Please read this agreement, fill in your details, initial each section and sign at the bottom. It takes about five minutes. You'll get an emailed copy when you're done.</p>
+  </div>
+</header>
+
+<main class="w-main">
+  <div class="wrap w-wrap">
+
+    <form id="waiver-form" class="w-form" novalidate>
+
+      <!-- ---------- WHO IS SIGNING ---------- -->
+      <fieldset class="w-card">
+        <legend>Who is signing?</legend>
+        <div class="w-choice">
+          <label><input type="radio" name="signerType" value="adult" checked> I'm the participant, and I'm 18 or older</label>
+          <label><input type="radio" name="signerType" value="guardian"> I'm a parent or legal guardian signing for a participant under 18</label>
+        </div>
+      </fieldset>
+
+      <!-- ---------- PARTICIPANT ---------- -->
+      <fieldset class="w-card">
+        <legend>Participant</legend>
+        <div class="w-grid">
+          <label class="w-span2">Participant's full name
+            <input type="text" id="participantName" name="participantName" autocomplete="name" required>
+          </label>
+          <label>Date of birth
+            <input type="date" id="participantDob" name="participantDob" required>
+          </label>
+          <label>Phone <span class="w-hint" data-guardian-text="(parent or guardian)"></span>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+          </label>
+          <label class="w-span2">Email <span class="w-hint" data-guardian-text="(parent or guardian; your copy is sent here)">(your signed copy is sent here)</span>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="w-span2">Street address
+            <input type="text" id="street" name="street" autocomplete="street-address">
+          </label>
+          <label>City
+            <input type="text" id="city" name="city" autocomplete="address-level2">
+          </label>
+          <div class="w-pair">
+            <label>State
+              <input type="text" id="state" name="state" autocomplete="address-level1" value="CA">
+            </label>
+            <label>ZIP
+              <input type="text" id="zip" name="zip" autocomplete="postal-code" inputmode="numeric">
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ---------- PARENT / GUARDIAN (only when signing for a minor) ---------- -->
+      <fieldset class="w-card" id="guardian-box" hidden>
+        <legend>Parent or legal guardian</legend>
+        <div class="w-grid">
+          <label class="w-span2">Your full name
+            <input type="text" id="guardianName" name="guardianName" autocomplete="name">
+          </label>
+          <label class="w-span2">Relationship to the participant
+            <input type="text" id="guardianRelationship" name="guardianRelationship" placeholder="Mother, father, legal guardian…">
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ---------- EMERGENCY CONTACT ---------- -->
+      <fieldset class="w-card">
+        <legend>Emergency contact</legend>
+        <div class="w-grid">
+          <label class="w-span2">Name
+            <input type="text" id="emergencyName" name="emergencyName" required>
+          </label>
+          <label>Relationship
+            <input type="text" id="emergencyRelationship" name="emergencyRelationship" required>
+          </label>
+          <label>Phone
+            <input type="tel" id="emergencyPhone" name="emergencyPhone" required>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ---------- THE WAIVER ---------- -->
+      <section class="w-card w-doc" aria-labelledby="doc-title">
+        <h2 id="doc-title">Release of Liability and Assumption of Risk Agreement</h2>
+        <p class="w-doc-sub">Danielle Edmundson · Personal training and coaching · Santa Cruz, California</p>
+        <p class="w-note">Danielle Edmundson recommends that you check with your physician before starting any exercise program.</p>
+
+        <section class="w-clause" data-key="risk">
+          <h3>1. Acknowledgement and acceptance of risk</h3>
+          <p>I acknowledge that I have chosen to participate in one or more fitness programs, sessions or services provided by Danielle Edmundson. These may include, but are not limited to, one-on-one personal training, small-group training, group classes, online or virtual coaching, workouts I complete on my own from programming she provides, and nutrition and metabolic health guidance (together, the "Training Programs").</p>
+          <p>I understand that the Training Programs can be strenuous and may push me to the limits of my physical abilities, and that they carry risks. These risks include, but are not limited to: injury to the muscles, bones, joints, ligaments or tendons; injury to the heart, lungs or circulatory system, which can result in serious injury or death; injury caused by my own actions or those of a training partner or other people nearby; injury caused by improper use or failure of equipment; and injury or illness resulting from a medical condition, whether or not I know about it. I am aware that any of these risks could result in serious injury or death.</p>
+          <label class="w-initials">Initials <input type="text" name="init-risk" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="health">
+          <h3>2. Assumption of risk and my health</h3>
+          <p>I willingly assume full responsibility for all risks I am exposed to through my participation in Training Programs, and I accept full responsibility for any injury or death that may result. I understand that adverse physical changes can occur during exercise, including abnormal blood pressure, fainting, irregular heart rhythm, stroke, rhabdomyolysis (severe muscle damage) and, in rare cases, heart attack or death.</p>
+          <p>I have told Danielle Edmundson about any injury, medical condition, medication or pregnancy that could affect my ability to exercise safely, and I will tell her promptly if my health changes. I understand that sessions may take place in private homes (including Danielle Edmundson's home gym), in gyms, or in outdoor and public spaces, and that I may encounter hazards there, including uneven surfaces, traffic, weather, other people and pets.</p>
+          <label class="w-initials">Initials <input type="text" name="init-health" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="remote">
+          <h3>3. Online coaching and nutrition guidance</h3>
+          <p>I understand that when I follow programming or guidance remotely, including online sessions and workouts I complete on my own, Danielle Edmundson is not present to supervise me, and I am responsible for my own exercise space, equipment and safety.</p>
+          <p>I understand that nutrition and metabolic health guidance from Danielle Edmundson is educational and is not medical advice, diagnosis or treatment. I will consult my physician before making significant changes to my diet, especially if I have a medical condition or take medication.</p>
+          <label class="w-initials">Initials <input type="text" name="init-remote" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="release">
+          <h3>4. Release of liability</h3>
+          <p>In consideration of being allowed to participate in Training Programs, and with full understanding of the risks described above, I voluntarily waive, release, discharge and hold harmless Danielle Edmundson and anyone acting on her behalf from any and all liability, claims, demands, actions or rights of action, or damages of any kind related to, arising from, or in any way connected with my participation in Training Programs, including those allegedly caused by the negligent acts or omissions of the people released.</p>
+          <p><strong>By signing this agreement, I understand that if I (or any minor on whose behalf I am signing) am hurt, die, or my property is damaged, I am giving up my right to make a claim or file a lawsuit against Danielle Edmundson, even if she negligently causes the injury or damage.</strong></p>
+          <p>This agreement is binding on me and on my heirs, executors, representatives, successors and assigns. If any part of this agreement is held invalid, the rest of the agreement remains in full force and effect.</p>
+          <label class="w-initials">Initials <input type="text" name="init-release" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="indemnity">
+          <h3>5. Indemnification</h3>
+          <p>I accept financial responsibility for any injury I cause to myself or to anyone else through my own negligence. I agree to indemnify, defend and hold harmless Danielle Edmundson and anyone acting on her behalf from liability for injury to or death of any person, and damage to property, that results from my negligent or intentional act or omission while participating in Training Programs. If Danielle Edmundson has to pay attorney's fees or legal costs to enforce this agreement, I agree to reimburse those fees and costs.</p>
+          <label class="w-initials">Initials <input type="text" name="init-indemnity" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="photos">
+          <h3>6. Photos and video</h3>
+          <p>Danielle Edmundson sometimes takes photos or video during sessions to share on her website and social media. Please choose whether she may use photos, video or other likenesses of the participant for these purposes. I can change my choice at any time by telling her in writing.</p>
+          <div class="w-choice w-choice-inline" role="radiogroup" aria-label="Photo and video permission">
+            <label><input type="radio" name="photoConsent" value="Yes" required> Yes, Danielle Edmundson may use photos and video</label>
+            <label><input type="radio" name="photoConsent" value="No"> No, please don't use photos or video of the participant</label>
+          </div>
+          <label class="w-initials">Initials <input type="text" name="init-photos" maxlength="4" autocomplete="off" required></label>
+        </section>
+
+        <section class="w-clause" data-key="minor" id="minor-clause" hidden>
+          <h3>7. Parents and legal guardians</h3>
+          <p>As the parent or legal guardian of a participant under 18 years of age, I have read this agreement and voluntarily agree that the minor may participate in Training Programs. I sign this agreement on the minor's behalf and on behalf of the minor's parents and legal guardians, and I agree to all of its terms on their behalf. I give permission for Danielle Edmundson to provide any first aid she considers necessary and, in case of serious illness or injury, to call for medical or surgical care for the minor and to arrange transport to a medical facility.</p>
+          <label class="w-initials">Initials <input type="text" name="init-minor" maxlength="4" autocomplete="off"></label>
+        </section>
+
+        <section class="w-clause w-final" data-key="acknowledge">
+          <h3>Acknowledgement</h3>
+          <p>I have read this agreement in its entirety and I fully understand it. I understand that by signing it I am releasing any and all claims against Danielle Edmundson, that I am agreeing to indemnify the people named for liability caused by my negligent or intentional acts or omissions, and that by voluntarily signing this agreement I am giving up valuable legal rights. I agree that signing electronically has the same effect as signing on paper.</p>
+        </section>
+      </section>
+
+      <!-- ---------- SIGN ---------- -->
+      <fieldset class="w-card w-sign">
+        <legend>Sign</legend>
+        <label class="w-check"><input type="checkbox" id="agree" name="agree" required> <span>I have read and agree to this Release of Liability and Assumption of Risk Agreement.</span></label>
+
+        <label class="w-span2">Your full name, as you're signing <span class="w-hint" id="signer-hint">(participant)</span>
+          <input type="text" id="signerName" name="signerName" required>
+        </label>
+
+        <div class="w-sigwrap">
+          <div class="w-siglabel"><span id="sig-label">Signature</span> <span class="w-hint">Draw with your finger or mouse</span></div>
+          <canvas id="sig" class="w-sigpad" aria-label="Signature pad. Draw your signature here." role="img"></canvas>
+          <div class="w-sigfoot"><span>Date: <strong id="today"></strong></span><button type="button" class="w-clear" id="sig-clear">Clear signature</button></div>
+        </div>
+
+        <p class="hidden-field"><label>Leave this unchecked <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label></p>
+
+        <p class="w-error" id="form-error" role="alert" hidden></p>
+        <button type="submit" class="w-submit" id="submit-btn">SIGN WAIVER</button>
+        <p class="w-small" id="not-ready" hidden>Online signing isn't switched on yet. Please contact Danielle at 831-345-7779 to sign a paper copy.</p>
+      </fieldset>
+    </form>
+
+    <!-- shown after a successful signature -->
+    <section class="w-card w-done" id="done" hidden tabindex="-1" aria-live="polite">
+      <p class="eyebrow">Waiver signed</p>
+      <h2>Thank you, you're all set.</h2>
+      <p>A copy of your signed waiver is on its way to <strong id="done-email"></strong>. If you don't see it in a few minutes, check your spam folder.</p>
+      <p>See you soon! Questions? Call or text Danielle at <a href="tel:8313457779">831-345-7779</a>.</p>
+      <a href="index.html" class="btn btn-gold">Back to coachdee.fit</a>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Coach D.E.E. · Diet · Exercise · Empowerment</span>
+    <span>coachdee.fit · Santa Cruz, CA</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ====== SETTINGS ====== */
+  // Paste the web address of the Google program here (between the quotes).
+  var WAIVER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwnWnj37hPwyH_XdTlOyySJ4TaYNBe75ISBE0T_s0U3akg2C2460PfciDIcEfnqZrJSgA/exec';
+  // Change this date whenever the waiver wording changes. It's printed on every signed copy.
+  var WAIVER_VERSION = 'Danielle Edmundson liability waiver, version of November 2026';
+  /* ====================== */
+
+  var form = document.getElementById('waiver-form');
+  var guardianBox = document.getElementById('guardian-box');
+  var minorClause = document.getElementById('minor-clause');
+  var errorBox = document.getElementById('form-error');
+  var submitBtn = document.getElementById('submit-btn');
+  var today = new Date();
+  document.getElementById('today').textContent = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  if (!WAIVER_ENDPOINT) document.getElementById('not-ready').hidden = false;
+
+  /* ---- adult or guardian ---- */
+  function isGuardian() { return form.signerType.value === 'guardian'; }
+  function updateSigner() {
+    var g = isGuardian();
+    guardianBox.hidden = !g;
+    minorClause.hidden = !g;
+    document.getElementById('guardianName').required = g;
+    document.getElementById('guardianRelationship').required = g;
+    minorClause.querySelector('input').required = g;
+    document.getElementById('signer-hint').textContent = g ? '(parent or guardian)' : '(participant)';
+    document.getElementById('sig-label').textContent = g ? 'Parent or guardian signature' : 'Signature';
+    document.querySelectorAll('[data-guardian-text]').forEach(function (el) {
+      if (!el.dataset.adultText) el.dataset.adultText = el.innerHTML;
+      el.innerHTML = g ? el.dataset.guardianText : el.dataset.adultText;
+    });
+  }
+  form.querySelectorAll('input[name="signerType"]').forEach(function (r) { r.addEventListener('change', updateSigner); });
+  updateSigner();
+
+  /* ---- signature pad ---- */
+  var canvas = document.getElementById('sig'), ctx = canvas.getContext('2d');
+  var drawing = false, hasInk = false, last = null;
+  function sizeCanvas() {
+    var r = canvas.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    var keep = hasInk ? canvas.toDataURL() : null;
+    canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#102A32';
+    if (keep) { var img = new Image(); img.onload = function () { ctx.drawImage(img, 0, 0, r.width, r.height); }; img.src = keep; }
+  }
+  function pos(e) { var r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  canvas.addEventListener('pointerdown', function (e) {
+    e.preventDefault(); drawing = true; last = pos(e); canvas.setPointerCapture(e.pointerId);
+    ctx.beginPath(); ctx.arc(last.x, last.y, 1.1, 0, Math.PI * 2); ctx.fillStyle = '#102A32'; ctx.fill();
+    hasInk = true;
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!drawing) return; e.preventDefault();
+    var p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p;
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (t) { canvas.addEventListener(t, function () { drawing = false; }); });
+  document.getElementById('sig-clear').addEventListener('click', function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); hasInk = false;
+  });
+  window.addEventListener('resize', sizeCanvas);
+  sizeCanvas();
+
+  function signatureImage() {
+    var out = document.createElement('canvas'); out.width = canvas.width; out.height = canvas.height;
+    var o = out.getContext('2d'); o.fillStyle = '#FFFFFF'; o.fillRect(0, 0, out.width, out.height); o.drawImage(canvas, 0, 0);
+    return out.toDataURL('image/png');
+  }
+
+  /* ---- collect the exact waiver wording the person read ---- */
+  function clauses() {
+    var list = [];
+    document.querySelectorAll('.w-clause').forEach(function (sec) {
+      if (sec.hidden) return;
+      var paras = [];
+      sec.querySelectorAll('p').forEach(function (p) { paras.push(p.textContent.replace(/\s+/g, ' ').trim()); });
+      var init = sec.querySelector('.w-initials input');
+      list.push({ title: sec.querySelector('h3').textContent.trim(), paragraphs: paras, initials: init ? init.value.trim() : '' });
+    });
+    return list;
+  }
+
+  function showError(msg, el) {
+    errorBox.textContent = msg; errorBox.hidden = false;
+    if (el) { el.focus(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.hidden = true;
+    var bad = Array.prototype.find.call(form.querySelectorAll('input[required]'), function (el) {
+      if (el.closest('[hidden]')) return false;
+      if (el.type === 'radio') return !form.querySelector('input[name="' + el.name + '"]:checked');
+      if (el.type === 'checkbox') return !el.checked;
+      return !el.value.trim() || !el.checkValidity();
+    });
+    if (bad) {
+      var what = bad.closest('.w-clause') ? 'Please add your initials (and any choice) in every section.' :
+        bad.type === 'checkbox' ? 'Please tick the box to confirm you have read and agree to the waiver.' :
+        bad.type === 'email' && bad.value ? 'Please check the email address.' : 'Please fill in all the required details.';
+      return showError(what, bad);
+    }
+    if (!hasInk) return showError('Please sign in the signature box.', canvas);
+    if (!WAIVER_ENDPOINT) return showError('Online signing isn’t switched on yet. Please contact Danielle at 831-345-7779.');
+
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    var payload = {
+      waiverVersion: WAIVER_VERSION,
+      signerType: isGuardian() ? 'Parent/guardian for a minor' : 'Adult participant',
+      participantName: v('participantName'), participantDob: v('participantDob'),
+      email: v('email'), phone: v('phone'),
+      address: [v('street'), v('city'), [v('state'), v('zip')].filter(Boolean).join(' ')].filter(Boolean).join(', '),
+      guardianName: isGuardian() ? v('guardianName') : '', guardianRelationship: isGuardian() ? v('guardianRelationship') : '',
+      emergencyName: v('emergencyName'), emergencyRelationship: v('emergencyRelationship'), emergencyPhone: v('emergencyPhone'),
+      photoConsent: form.photoConsent.value,
+      clauses: clauses(),
+      signerName: v('signerName'),
+      signature: signatureImage(),
+      signedAtLocal: new Date().toString(),
+      timeZone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),
+      pageUrl: location.href, userAgent: navigator.userAgent,
+      botcheck: form.botcheck.checked
+    };
+
+    submitBtn.disabled = true; submitBtn.textContent = 'SENDING…';
+    fetch(WAIVER_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.ok) throw new Error((res && res.error) || 'failed');
+        form.hidden = true;
+        document.getElementById('done-email').textContent = payload.email;
+        var done = document.getElementById('done'); done.hidden = false; done.focus();
+        done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(function () {
+        submitBtn.disabled = false; submitBtn.textContent = 'SIGN WAIVER';
+        showError('Sorry, your waiver didn’t go through. Please check your connection and try again, or call Danielle at 831-345-7779.');
+      });
+  });
+})();
+</script>
+</body>
+</html>
