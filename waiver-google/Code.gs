@@ -38,13 +38,16 @@ function doPost(e) {
     var baseName = day + ' - ' + safe_(d.participantName) + ' - Waiver';
 
     // Build a Google Doc, turn it into a PDF, keep the PDF, delete the Doc.
-    var doc = DocumentApp.create(baseName);
-    buildDoc_(doc, d, now);
-    doc.saveAndClose();
-    var docFile = DriveApp.getFileById(doc.getId());
-    var pdfBlob = docFile.getAs('application/pdf').setName(baseName + '.pdf');
-    var pdfFile = folder.createFile(pdfBlob);
-    docFile.setTrashed(true);
+    var doc = DocumentApp.create(baseName), docFile, pdfBlob, pdfFile;
+    try {
+      buildDoc_(doc, d, now);
+      doc.saveAndClose();
+      docFile = DriveApp.getFileById(doc.getId());
+      pdfBlob = docFile.getAs('application/pdf').setName(baseName + '.pdf');
+      pdfFile = folder.createFile(pdfBlob);
+    } finally {
+      try { DriveApp.getFileById(doc.getId()).setTrashed(true); } catch (ignore) {}
+    }
 
     logRow_(folder, d, now, pdfFile);
     sendEmails_(d, pdfBlob, pdfFile);
@@ -80,8 +83,8 @@ function buildDoc_(doc, d, now) {
   var teal = '#183D48', red = '#933C31', grey = '#555555';
 
   var t = body.getParagraphs()[0];
-  t.setText('Release of Liability and Assumption of Risk Agreement')
-   .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  t.setText('Release of Liability and Assumption of Risk Agreement');
+  t.setHeading(DocumentApp.ParagraphHeading.HEADING1);
   t.editAsText().setForegroundColor(teal).setFontSize(17).setBold(true);
   para_(body, 'Danielle Edmundson · Personal training and coaching · Santa Cruz, California', grey, 10);
   para_(body, 'Signed electronically at coachdee.fit on ' +
@@ -134,7 +137,7 @@ function buildDoc_(doc, d, now) {
 }
 
 function para_(body, text, color, size) {
-  var p = body.appendParagraph(String(text));
+  var p = body.appendParagraph(String(text || ' '));
   p.editAsText().setForegroundColor(color).setFontSize(size).setBold(false);
   p.setSpacingAfter(6);
   return p;
@@ -213,6 +216,26 @@ function sendEmails_(d, pdfBlob, pdfFile) {
 // ---------- helpers ----------
 function safe_(s) { return String(s).replace(/[\\\/:*?"<>|]/g, '').trim().slice(0, 80) || 'Unnamed'; }
 function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+
+/**
+ * Test from the editor: choose "testWaiver" and press Run. It makes a sample
+ * waiver PDF (participant "TEST - delete me") and sends the emails to this
+ * account only, so you can check everything works. Delete the test PDF and
+ * its row in the log afterwards.
+ */
+function testWaiver() {
+  var me = Session.getEffectiveUser().getEmail();
+  var dot = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+  var res = doPost({ postData: { contents: JSON.stringify({
+    waiverVersion: 'TEST', signerType: 'Adult participant', participantName: 'TEST - delete me',
+    participantDob: '1990-01-01', email: me, phone: '000-000-0000', address: '',
+    emergencyName: 'Test Contact', emergencyRelationship: 'Friend', emergencyPhone: '000-000-0000',
+    photoConsent: 'No', signerName: 'Test Signer', signature: dot,
+    clauses: [{ title: '1. Test section', paragraphs: ['This is a test.'], initials: 'TT' }],
+    signedAtLocal: String(new Date()), timeZone: TIME_ZONE, pageUrl: 'editor test', userAgent: 'editor'
+  }) } });
+  console.log(res.getContent());
+}
 
 /**
  * Run this once from the editor (select "setUp" and press Run) to give the

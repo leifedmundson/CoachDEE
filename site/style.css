@@ -551,3 +551,6 @@ footer a:hover { color: var(--warm-yellow); }
 
 [hidden] { display: none !important; }   /* keep hidden things hidden, even ones styled as flex */
 .w-hint:empty { display: none; }
+
+.topbar nav a[aria-current="page"] { color: var(--warm-yellow); }
+@media (max-width: 480px) { .topbar nav { gap: 6px 18px; font-size: 15px; } }
